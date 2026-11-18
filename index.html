@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Billora - Invoice Maker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+  <aside class="sidebar">
+    <h2 class="logo">Billora<span>.</span></h2>
+    <p class="tagline">INVOICE MANAGEMENT</p>
+
+    <button class="nav active">Dashboard</button>
+    <button class="nav" onclick="showInvoice()">Create Invoice</button>
+    <button class="nav" onclick="showHistory()">Invoice History</button>
+
+    <div class="side-bottom">
+      <p>Simple billing. Smarter business.</p>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <h1>Dashboard</h1>
+        <p>Manage your business invoices.</p>
+      </div>
+      <button class="primary" onclick="showInvoice()">+ New Invoice</button>
+    </header>
+
+    <section id="dashboard">
+      <div class="stats">
+        <div class="stat">
+          <p>Total Invoices</p>
+          <h2 id="totalInvoices">0</h2>
+        </div>
+        <div class="stat">
+          <p>Total Revenue</p>
+          <h2 id="totalRevenue">₹0.00</h2>
+        </div>
+        <div class="stat">
+          <p>Saved Customers</p>
+          <h2 id="totalCustomers">0</h2>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Recent Invoices</h2>
+        <div id="recentInvoices">
+          <p class="empty">No invoices yet. Create your first invoice!</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="invoicePage" class="hidden">
+      <div class="panel">
+        <h2>Create New Invoice</h2>
+
+        <div class="form-grid">
+          <div>
+            <label>Business Name</label>
+            <input id="businessName" placeholder="Your business name">
+          </div>
+          <div>
+            <label>Invoice Number</label>
+            <input id="invoiceNumber">
+          </div>
+          <div>
+            <label>Customer Name</label>
+            <input id="customerName" placeholder="Customer name">
+          </div>
+          <div>
+            <label>Customer Email</label>
+            <input id="customerEmail" type="email" placeholder="Email address">
+          </div>
+          <div>
+            <label>Invoice Date</label>
+            <input id="invoiceDate" type="date">
+          </div>
+          <div>
+            <label>Due Date</label>
+            <input id="dueDate" type="date">
+          </div>
+        </div>
+
+        <h3>Invoice Items</h3>
+
+        <div class="item-header">
+          <span>Description</span>
+          <span>Qty</span>
+          <span>Price</span>
+          <span>Total</span>
+          <span></span>
+        </div>
+
+        <div id="items"></div>
+
+        <button class="secondary" onclick="addItem()">+ Add Item</button>
+
+        <div class="totals">
+          <div>
+            <label>Tax (%)</label>
+            <input id="tax" type="number" min="0" max="100" value="0" oninput="calculate()">
+          </div>
+          <p>Subtotal: <strong id="subtotal">₹0.00</strong></p>
+          <p>Tax: <strong id="taxAmount">₹0.00</strong></p>
+          <h2>Total: <span id="grandTotal">₹0.00</span></h2>
+        </div>
+
+        <div class="actions">
+          <button class="secondary" onclick="showDashboard()">Cancel</button>
+          <button class="primary" onclick="saveInvoice()">Save Invoice</button>
+          <button class="dark" onclick="downloadInvoice()">Download / Print PDF</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="historyPage" class="hidden">
+      <div class="panel">
+        <h2>Invoice History</h2>
+        <div id="historyList"></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
